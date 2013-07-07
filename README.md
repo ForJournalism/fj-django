@@ -26,7 +26,7 @@ Chapter 2 focuses on writing code to support the real-world models we theorized 
 
 ## Chapter 3: Importing data
 
-We'll write an importer to parse the data source and insert it into our models. We'll also talk through the difference between creating and updating records and making sure that we don't have duplicate data.
+We'll write an importer to parse the data source and insert it into our models. This parsing will involve some light web scraping and discussion of scraping framework BeautifulSoup. We'll also talk through the difference between creating and updating records and making sure that we don't have duplicate data.
 
 ### Deliverables:
 
