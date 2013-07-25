@@ -13,3 +13,12 @@ def scrape_inspections():
 
 def scrape_inspection_html():
 	data.scrape_inspection_html()
+
+def parse_inspection_html():
+	data.parse_inspection_html()
+
+def insert_restaurants():
+	data.insert_restaurants()
+
+def insert_inspections():
+	data.insert_inspections()
