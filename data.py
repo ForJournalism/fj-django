@@ -161,6 +161,26 @@ def parse_inspection_html():
         inspection_dict = {}
         inspection_dict['type'] = soup.select('div.container > div')[16].text.strip()
 
+        time_part = soup.select('html > body > table')[1].select('table')[0].select('tr')[3].text.split('\n')
+
+        inspection_dict['time_in'] = '%s/%s/%s %s:%s %s' % (
+            time_part[4].strip(),
+            time_part[6].strip(),
+            time_part[8].strip(),
+            time_part[10].strip(),
+            time_part[12].strip(),
+            time_part[13].strip()
+        )
+
+        inspection_dict['time_out'] = '%s/%s/%s %s:%s %s' % (
+            time_part[4].strip(),
+            time_part[6].strip(),
+            time_part[8].strip(),
+            time_part[15].strip(),
+            time_part[17].strip(),
+            time_part[18].strip()
+        )
+
         for j, z in enumerate(soup.select('div.checkboxRedN')):
             if z['style'].split('height:5px;width:5px;background-color:')[1].split(';')[0] == '#FF0000':
                 inspection_dict['risk_category'] = j + 1
@@ -208,7 +228,7 @@ def parse_inspection_html():
         inspection = dict(inspection, **inspection_dict)
         updated_inspections.append(inspection)
 
-        print i, inspection['inspection_id']
+        print i, inspection['time_in']
 
     with open('data/inspection_list.json', 'wb') as jsonfile:
         jsonfile.write(json.dumps(updated_inspections))
