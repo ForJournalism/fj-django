@@ -22,10 +22,13 @@ class Restaurant(models.Model):
 	inspection_url = models.TextField(null=True)
 	slug = models.SlugField(max_length=255)
 
-	def __unicode__(self):
-		return self.title
+	class Meta():
+		ordering = ['title']
 
-	def save(self):
+	def __unicode__(self):
+		return '%s (%s)' % (self.title, self.permit_id)
+
+	def save(self, *args, **kwargs):
 		"""
 		Override the save method to handle some preprocessing.
 		"""
