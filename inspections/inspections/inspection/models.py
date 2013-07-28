@@ -20,16 +20,18 @@ class Inspection(models.Model):
 		u'restaurant'
 	"""
 	inspection_type = models.CharField(max_length=255)
-	inspection_id = models.CharField(max_length=255)
 	risk_category = models.CharField(max_length=255)
-	inspection_date_in = models.DateTimeField(null=True)
-	inspection_date_out = models.DateTimeField(null=True)
-	inspection_url = models.TextField()
+	time_in = models.DateTimeField(null=True)
+	time_out = models.DateTimeField(null=True)
 	critical = models.IntegerField(default=0)
 	noncritical = models.IntegerField(default=0)
 	critical_corrected_on_site = models.IntegerField(default=0)
 	noncritical_corrected_on_site = models.IntegerField(default=0)
 	restaurant = models.ForeignKey(Restaurant, null=True, blank=True)
+	inspection_id = models.CharField(max_length=255)
+	inspection_url = models.TextField()
+	class Meta:
+		ordering = ['-time_in']
 
 	def __unicode__(self):
 		return 'Inspection #%s: %s' % (self.inspection_id, self.restaurant.title)
@@ -43,9 +45,9 @@ class Observation(models.Model):
 		u'observation'
 		u'dcmr'
 	"""
-	correction = models.TextField()
-	observation = models.TextField()
 	dcmr = models.TextField()
+	observation = models.TextField()
+	correction = models.TextField()
 	inspection = models.ForeignKey(Inspection, null=True, blank=True)
 
 	def __unicode__(self):

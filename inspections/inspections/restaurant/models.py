@@ -21,12 +21,17 @@ class Restaurant(models.Model):
 	restaurant_type = models.CharField(max_length=255, null=True)
 	inspection_url = models.TextField(null=True)
 	slug = models.SlugField(max_length=255)
+	inspection_count = models.IntegerField(default=0)
 
 	class Meta():
 		ordering = ['title']
 
 	def __unicode__(self):
 		return '%s (%s)' % (self.title, self.permit_id)
+
+	def get_inspection_count(self):
+		from inspections.inspection.models import Inspection
+		return Inspection.objects.filter(restaurant=self).count()
 
 	def save(self, *args, **kwargs):
 		"""
@@ -38,5 +43,7 @@ class Restaurant(models.Model):
 		# Cool URLs don't change.
 		if not self.slug:
 			self.slug = slugify('%s %s' % (self.title, self.permit_id))
+
+		self.inspection_count = self.get_inspection_count()
 		
 		super(Restaurant, self).save(**kwargs)
