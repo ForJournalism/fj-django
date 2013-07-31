@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="{% url 'restaurant-detail' inspection.restaurant.id %}">&larr; Back to {{ inspection.restaurant.title }}</a>
+<h1>{{ inspection.time_in }} ({{ inspection.observation_set.all|length }})</h1>
+<ul>{% for observation in inspection.observation_set.all %}
+	<li>
+		<span class="dmcr">{{ observation.dcmr }}</span>
+		<span class="observation">{{ observation.observation }}</span>
+		<span class="correction">{{ observation.correction }}</span>
+	</li>
+{% endfor %}</ul>
+{% endblock %}

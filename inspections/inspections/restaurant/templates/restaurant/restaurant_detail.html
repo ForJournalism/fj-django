@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href="../">&larr; back to restaurant list</a>
+	<h1>{{ restaurant.title }} ({{ restaurant.inspection_count }})</h1>
+	<p>{{ restaurant.address }}</p>
+		{% for inspection in restaurant.inspection_set.all %}
+		<h2> 
+			<a href="{% url 'inspection-detail' inspection.id %}">
+				{{ inspection.time_in }}</a>
+			({{ inspection.observation_set.all|length }})
+		</h2>
+		<h3></h3>
+		{% endfor %}
+	<h2>Nearby ({{ nearby_restaurants|length }})</h2>
+	<ul>{% for nearby in nearby_restaurants %}
+		<li>{{ nearby.distance.ft|floatformat }} feet away: <a href="{% url 'restaurant-detail' nearby.id %}">
+			{{ nearby.title }}</a></li>
+	{% endfor %}</ul>
+{% endblock %}

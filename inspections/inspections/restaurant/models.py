@@ -1,5 +1,9 @@
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.template.defaultfilters import slugify
+from geopy import geocoders
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], ["^django\.contrib\.gis"])
 
 class Restaurant(models.Model):
 	"""
@@ -22,6 +26,9 @@ class Restaurant(models.Model):
 	inspection_url = models.TextField(null=True)
 	slug = models.SlugField(max_length=255)
 	inspection_count = models.IntegerField(default=0)
+	point = models.PointField(null=True)
+
+	objects = models.GeoManager()
 
 	class Meta():
 		ordering = ['title']
@@ -33,10 +40,22 @@ class Restaurant(models.Model):
 		from inspections.inspection.models import Inspection
 		return Inspection.objects.filter(restaurant=self).count()
 
+	def admin_point(self):
+		if self.point:
+			return '%s, %s' % (self.point.y, self.point.x)
+		return None
+
 	def save(self, *args, **kwargs):
 		"""
 		Override the save method to handle some preprocessing.
 		"""
+		if not self.point:
+			g = geocoders.GoogleV3()
+			try:
+				place, (lat, lng) = g.geocode(self.address)
+				self.point = Point(lng, lat)
+			except ValueError:
+				pass
 
 		# Create the slug if it doesn't exist.
 		# Don't overwrite the slug if it does.
