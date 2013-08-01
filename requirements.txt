@@ -2,6 +2,7 @@ Django==1.5.1
 Fabric==1.6.1
 South==0.8.1
 beautifulsoup4==4.2.1
+django-debug-toolbar==0.9.4
 django-tastypie==0.9.15
 geopy==0.95.1
 ipython==0.13.2
