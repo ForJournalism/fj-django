@@ -1,9 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h2>Recent inspections</h2>
     <ul>
-    {% for restaurant in object_list %}
-        <li><a href="{{ restaurant.id }}/">{{ restaurant.title }} ({{ restaurant.inspection_count }})</a></li>
+    {% for inspection in recent_10_inspections %}
+        <li>{{ inspection.time_in }} <a href="{% url 'restaurant-detail' inspection.restaurant__id %}">
+            {{ inspection.restaurant__title }}</a></li>
     {% endfor %}
     </ul>
+
+	<h2>Most inspections</h2>
+    <ul>
+    {% for restaurant in top_10_inspections %}
+        <li>{{ restaurant.inspection_count }} <a href="{% url 'restaurant-detail' restaurant.id %}">{{ restaurant.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+	<h2>Most violations</h2>
+    <ul>
+    {% for restaurant in top_10_violations %}
+        <li>{{ restaurant.observation_count }} <a href="{% url 'restaurant-detail' restaurant.id %}">{{ restaurant.title }}</a></li>
+    {% endfor %}
+    </ul>
+
+    <h2>Quadrants</h2>
+    <ul>{% for quadrant in quadrants %}
+        <li>{{ quadrant.restaurant_count }}
+            <a href="{% url 'restaurant-by-quadrant' quadrant.name %}">{{ quadrant.name|upper }}</a></li>
+    {% endfor %}</ul>
+
+
+    <h1>{{ page_title }}</h1>
+    {% for restaurant in object_list %}
+        <li><a href="{% url 'restaurant-detail' restaurant.id %}">{{ restaurant.title }}</a></li>
+    {% endfor %}
 {% endblock %}

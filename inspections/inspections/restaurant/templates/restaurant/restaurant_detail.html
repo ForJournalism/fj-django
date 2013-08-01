@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="../">&larr; back to restaurant list</a>
+<a href="{% url 'all-restaurants' %}">&larr; back to restaurant list</a>
 	<h1>{{ restaurant.title }} ({{ restaurant.inspection_count }})</h1>
 	<p>{{ restaurant.address }}</p>
 		{% for inspection in restaurant.inspection_set.all %}

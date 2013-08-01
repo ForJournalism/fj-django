@@ -102,6 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'inspections.urls'
@@ -121,6 +122,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.gis',
+    'debug_toolbar',
     'south',
     'inspections.restaurant',
     'inspections.inspection',
@@ -149,3 +151,5 @@ LOGGING = {
         },
     }
 }
+
+INTERNAL_IPS = ('127.0.0.1',)
