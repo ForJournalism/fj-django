@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     'debug_toolbar',
+    'tastypie',
     'south',
     'inspections.restaurant',
     'inspections.inspection',

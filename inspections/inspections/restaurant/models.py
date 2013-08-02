@@ -38,6 +38,11 @@ class Restaurant(models.Model):
 	def __unicode__(self):
 		return '%s (%s)' % (self.title, self.permit_id)
 
+	@property
+	def inspections(self):
+		from inspections.inspection.models import Inspection
+		return Inspection.objects.filter(restaurant=self)
+
 	def get_observation_count(self):
 		from inspections.inspection.models import Inspection, Observation
 		observation_count = 0
