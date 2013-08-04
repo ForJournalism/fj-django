@@ -1,7 +1,5 @@
 from django.contrib.gis.measure import D
 from django.views.generic import ListView, DetailView
-from haystack.query import SearchQuerySet
-from haystack.views import SearchView
 
 from inspections.restaurant.models import Restaurant
 from inspections.inspection.models import Inspection
@@ -26,17 +24,6 @@ def restaurant_list_context():
 
 	return context
 
-from haystack.views import *
-
-class RestaurantFacetedSearchView(SearchView):
-
-    def __name__(self):
-        return "RestaurantFacetedSearchView"
-
-    def extra_context(self):
-    	context = super(RestaurantFacetedSearchView, self).extra_context()
-    	context = dict(context, **restaurant_list_context())
-    	return context
 
 class RestaurantByQuadrantList(ListView):
 	"""
