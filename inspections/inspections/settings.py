@@ -123,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     'debug_toolbar',
+    'haystack',
     'tastypie',
     'south',
     'inspections.restaurant',
@@ -154,3 +155,12 @@ LOGGING = {
 }
 
 INTERNAL_IPS = ('127.0.0.1',)
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr'
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_ITERATOR_LOAD_PER_QUERY = 100
