@@ -61,7 +61,7 @@ We'll write an importer to parse the data source and insert it into our models. 
 
 ## Chapter 4
 
-#### Application structure; Views, URLs and Templates for Phase 1
+#### Application structure; Views, URLs and Templates Phase 1
 
 Chapter 4 starts off with a discussion of the two phases of our application: existing inspection data and live inspection data. We'll use this discussion to explain the model-view-template structure of Django and work backwards from URLs through views to models and templates. Finally, we'll start writing code for the existing-data phase of our Web application, since iterations are good.
 
@@ -77,26 +77,49 @@ Chapter 4 starts off with a discussion of the two phases of our application: exi
 * Orders the list of "nearby" restaurants by distance.
 * Updates the admin to show points on maps.
 
-## Chapter 5: Views, URLs and Templates for Phase 2
+## Chapter 5
 
-Chapter 5 dives into the live inspection results and builds a live dashboard page. We'll demonstrate the admin. Finally, we'll discuss some performance-related topics and how to make our application scale.
+#### Views, URLs and Templates Phase 2
 
-### Deliverables:
+Chapter 5 dives into the live inspection results and builds an interesting homepage. We'll demonstrate the admin. Finally, we'll discuss some performance-related topics and how to make our application scale.
 
-* The rest of the functions in views.py and urls.py to support a live dashboard for inspection data streams.
-* Updated bits in the existing views.py for type and source detail to add in live results to those pages.
+#### 01:40:32
 
-## Chapter 6: APIs, JSON and widgets
+* Writes top 10 restaurants by inspections.
+* Writes top 10 restaurants by violations (observations).
+* Identifies and solves a problem with duplicate inspections.
+* Performs a database backup/reload with Postgres commands.
+* Writes most recent 10 inspections.
+* Writes restaurant chart by quadrant.
+* Writes a view for restaurants by quadrant.
+* Installs django-debug-toolbar, a debugging and performance-testing tool.
+* Speeds up views with .values() queries, among other changes.
 
-Every modern Web application needs to have an API as well as a Web interface. We'll discuss why this is true, talk about TastyPie and pluggable applications for Django, and then set up some sample widget code for a single-source data widget.
+## Chapter 6
 
-### Deliverables:
+#### APIs and Search
 
-* An updated api.py with TastyPie to demonstrate a JSON API for inspect results.
-* Basic widget code for inspection results.
-* Link to JavaScript for Journalism
+If you're working on a dynamic web site, you're probably interested in APIs and/or search. We'll use django-tastypie to set up a full RESTful API for our restaurants site and django-haystack to build a search index. We'll even do some mildly advanced things like set up a search backend and enable faceted search!
 
-## Chapter 7: Putting it all together; Deployment; Maintenance
+#### 1:56:54
+
+* Introduces django-tastypie, an API wrapper for Django.
+* Writes an api.py for restaurants.
+* Includes restaurant info in returned data.
+* Includes inspections info in returned data.
+* Includes observations info in returned data.
+* Demonstrates URL filtering, ordering.
+* Introduces django-haystack, a search engine wrapper for Django.
+* Writes search index for restaurant names.
+* Returns results from index and not from the database.
+* Installs Apache Solr, a search engine backend.
+* Demonstrates reindexing of a search engine.
+* Updates the Solr schema, changing which fields are indexed.
+* Creates facets and a template to allow searching by facet.
+
+## Chapter 7
+
+#### Putting it all together; Deployment; Maintenance
 
 In Chapter 7, we'll talk about making our prototype official. We'll deploy it to a Web service-to-be-decided-soon (AWS? Heroku? S3 and flatfiles?) and discuss standard deployment tools like Fabric. We'll also talk about maintenance and a proper production-staging-development environment.
 
