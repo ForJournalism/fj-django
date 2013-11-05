@@ -1,46 +1,81 @@
 Django for Journalism
 ===================================
 
-## Chapter 1: Introduction; Overview of a Django app; Data analysis
+## Chapter 1
+
+#### Introduction; Overview of a Django app; Data analysis
 
 We'll start off the course with a quick description of the Django project/app structure and we'll walk through the data, breaking up an inspections project into three basic real-world model buckets. We'll talk through some of the quirks of inspection data and set up the project. Finally, we'll talk a little bit about virtualenv and the Python environment. And we'll commit our basic code to a VCS.
 
-### Deliverables:
+#### 00:53:16
 
-* A Django project called "inspections"
-* Multiple apps to let us designate inspection data types and sources. These apps will have the files necessary to support a Django application: api.py, admin.py, models.py, views.py and urls.py.
-* A settings.py and a global urls.py file.
-* A "hello world" moment running the Django admin on localhost.
-* A repository somewhere with the code in it. 
-* Link to Git for Journalists
+* Sets up virtualenv.
+* Checks out repository.
+* Creates project.
+* Creates apps; restaurant and inspection.
+* Sets up postgres db and user.
+* Changes settings file to add configuration.
+* Sets up and installs requirements.
+* Adds admin and south to settings file.
+* Adds admin to urls.py.
+* Demonstrates working runserver.
+* Sets up virtualenv hooks for postactivate.
+* Adds model classes for Restaurant, Inspection, Observation.
+* Adds restaurant and inspection to installed_apps in settings.py.
+* Runs initial south migration.
+* Changes a field in Inspection.
+* Runs updated south migration for inspection.
+* Adds admin.py for restaurant, inspection.
+* Sees add form in admin for Restaurant, Inspection, Observation.
 
-## Chapter 2: Models and importing data
+## Chapter 2
+
+#### Models and importing data
 
 Chapter 2 focuses on writing code to support the real-world models we theorized in Chapter 1. As part of Chapter 2, we'll also discuss South and basic database migrations.
 
-### Deliverables:
+#### 01:22:35
 
-* Each of the three applications will have working models.py files.
-* We'll configure South and prepare an initial migration.
-* We'll make a change to a model, create a migration and execute it.
+* Walks through the process of scraping data from the Web.
+* Introduces requests.
+* Introduces beautifulsoup.
+* Writes scraper for restaurants.
+* Writes scraper for inspections.
+* Writes and reads from JSON on the local filesystem.
+* Demonstrates git branch and git merge.
 
-## Chapter 3: Importing data
+## Chapter 3
+
+#### Importing data
 
 We'll write an importer to parse the data source and insert it into our models. This parsing will involve some light web scraping and discussion of scraping framework BeautifulSoup. We'll also talk through the difference between creating and updating records and making sure that we don't have duplicate data.
 
-### Deliverables:
+#### 01:30:20
 
-* We'll have a working importer that pulls data from the data source.
-* We'll verify that we have data by checking it out in the admin.
+* Introduces management commands.
+* Writes an importer for Restaurant from JSON in previous chapter.
+* Writes an importer for Inspection, Observation from JSON in previous chapter.
+* Saves a model instance -- several, actually.
+* Updates the admin.py for our restaurant and inspection to make forms look nice.
+* Performs another south migration to add a column to the database/field to a model.
 
-## Chapter 4: Application structure; Views, URLs and Templates for Phase 1
+## Chapter 4
+
+#### Application structure; Views, URLs and Templates for Phase 1
 
 Chapter 4 starts off with a discussion of the two phases of our application: existing inspection data and live inspection data. We'll use this discussion to explain the model-view-template structure of Django and work backwards from URLs through views to models and templates. Finally, we'll start writing code for the existing-data phase of our Web application, since iterations are good.
 
-### Deliverables:
-* Some functions in views.py and urls.py to support an inspection type and source detail pages. We'll also have list templates.
-* Stub templates for our pages.
-* Link to Responsive Design for Journalism
+#### 01:58:38
+
+* Introduces class-based views.
+* Writes a restaurant list URL, view and template.
+* Writes a restaurant detail URL, view and template.
+* Writes an inspection detail URL, view and template.
+* Geocodes restaurants using geocoder.py and Google V3.
+* Adds geographic fields to the model using south.
+* Adds a list of "nearby" restaurants on the restaurant detail page.
+* Orders the list of "nearby" restaurants by distance.
+* Updates the admin to show points on maps.
 
 ## Chapter 5: Views, URLs and Templates for Phase 2
 
